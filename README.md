@@ -1,6 +1,8 @@
 bCNC Forked
 ====
 
+---
+
 Forked travis-ci.com/vlachoudis
 
 # For drawing machines 
@@ -8,7 +10,10 @@ Forked travis-ci.com/vlachoudis
 - Adjusted slider settings 
 - Added sound 
 - Clear z at Stop 
-- Output position to stdout 
+- Output position to stdout
+- Revised status bar message  
+
+---
 
 
 GrblHAL (formerly GRBL) CNC command sender, autoleveler, g-code editor, digitizer, CAM
