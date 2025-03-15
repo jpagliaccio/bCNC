@@ -1,22 +1,20 @@
-bCNC
+bCNC Forked
 ====
+
+Forked travis-ci.com/vlachoudis
+
+# For drawing machines 
+- Simplify
+- Adjusted slider settings 
+- Added sound 
+- Clear z at Stop 
+- Output position to stdout 
+
 
 GrblHAL (formerly GRBL) CNC command sender, autoleveler, g-code editor, digitizer, CAM
 and swiss army knife for all your CNC needs.
 
 An advanced fully featured g-code sender for grblHAL (formerly GRBL). bCNC is a cross platform program (Windows, Linux, Mac) written in python. The sender is robust and fast able to work nicely with old or slow hardware like [Raspberry Pi](http://www.openbuilds.com/threads/bcnc-and-the-raspberry-pi.3038/) (As it was validated by the GRBL maintainer on heavy testing).
-
-## IMPORTANT! If you have any troubles using bCNC, please read [WIKI](https://github.com/vlachoudis/bCNC/wiki) and [DISCUSS](https://github.com/vlachoudis/bCNC/discussions) it first. Only create new [issues](https://github.com/vlachoudis/bCNC/issues) when you are certain there is a problem with actual bCNC code.
-
-[![Build Status](https://travis-ci.com/vlachoudis/bCNC.svg?branch=master)](https://travis-ci.com/vlachoudis/bCNC)
-[![CodeFactor](https://www.codefactor.io/repository/github/vlachoudis/bcnc/badge)](https://www.codefactor.io/repository/github/vlachoudis/bcnc)
-
-All pull requests that do change GUI should have attached screenshots of GUI before and after the changes.
-Please note that all pull requests should pass the Travis-CI build in order to get merged.https://github.com/Harvie/cnc-simulator
-Most pull requests should also pass CodeFactor checks if there is not good reason for failure.
-Before making pull request, please test your code on ~~both python2 and~~ python3.
-
-![bCNC screenshot](https://raw.githubusercontent.com/vlachoudis/bCNC/doc/Screenshots/bCNC.png)
 
 # Installation (using pip = recommended!)
 
@@ -66,37 +64,29 @@ and run the bCNC command
   - refer to your distro, eg.: https://wiki.archlinux.org/index.php/Python_package_guidelines
   - Py2deb to build Debian package from Python package: https://pypi.org/project/py2deb/
 
-# Installation (Compile to Windows .exe)
-
-Note that you might probably find some precompiled .exe files on github "releases" page:
-https://github.com/vlachoudis/bCNC/releases
-But they might not be up to date.
-
-This is basic example of how to compile bCNC to .exe file.
-(given that you have working bCNC in the first place, eg. using `pip install bCNC`).
-Go to the directory where is your bCNC installed and do the following:
-
-    pip install pyinstaller
-    pyinstaller --onefile --distpath . --hidden-import tkinter --paths lib;plugins;controllers --icon bCNC.ico --name bCNC __main__.py
-
-This will take a minute or two. But in the end it should create `bCNC.exe`.
-Also note that there is `make-exe.bat` file which will do just that for you.
-This will also create rather large "build" subdirectory.
-That is solely for caching purposes and you should delete it before redistributing!
-
-If you are going to report bugs in .exe version of bCNC,
-please check first if that bug occurs even when running directly in python (without .exe build).
 
 # IMPORTANT! Motion controller (grblHAL) settings
 - We strongly recommend you to use 32b microcontroller with grblHAL firmware for the new machine builds. https://github.com/grblHAL (Original GRBL firmware is still supported, but it is currently reaching the end-of-life due to limitations of 8b microcontrollers)
 - GRBL should be configured to use **MPos** rather than **Wpos**. This means that `$10=` should be set to odd number. As of GRBL 1.1 we recommend setting `$10=3`. If you have troubles communicating with your machine, you can try to set failsafe value `$10=1`.
+
 - CADs, bCNC and GRBL all work in millimeters by default. Make sure that `$13=0` is set in GRBL, if you experience strange behavior. (unless you've configured your CAD and bCNC to use inches)
-- Before filing bug please make sure you use latest stable official release of GRBL. Older and unofficial releases might work, but we frequently see cases where they don't. So please upgrade firmware in your Arduinos to reasonably recent version if you can.
-- Also read about all possible GRBL settings and make sure your setup is correct: https://github.com/gnea/grbl/wiki/Grbl-v1.1-Configuration
-- GrblHAL also has "Compatibility level" settings which have to be correctly configured during firmware compilation: https://github.com/grblHAL/core/wiki/Compatibility-level
+
 
 # Configuration
 You can modify most of the parameters from the "CAM -> Config/Controller" page.
+
+$100=250 Steps/mm  
+$101=250
+$102=250
+
+$110=3000 Max Rate, eg Rapid  
+$111=3000
+$112=3000
+
+$120=50.000 Accelaration, greater is faster 
+$121=50.000
+$122=50.000
+
 You can also enable (up to) 6-axis mode in Config section,
 but bCNC restart is required for changes to take place.
 Only the changes/differences from the default configuration
